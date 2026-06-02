@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class HeatExchangerCalculator {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Mass Flow Rate (kg/s): ");
+        double m = sc.nextDouble();
+
+        System.out.print("Specific Heat Cp (kJ/kg.K): ");
+        double cp = sc.nextDouble();
+
+        System.out.print("Hot Inlet Temp: ");
+        double Th_in = sc.nextDouble();
+
+        System.out.print("Hot Outlet Temp: ");
+        double Th_out = sc.nextDouble();
+
+        System.out.print("Cold Inlet Temp: ");
+        double Tc_in = sc.nextDouble();
+
+        System.out.print("Cold Outlet Temp: ");
+        double Tc_out = sc.nextDouble();
+
+        System.out.print("Overall U (W/m²K): ");
+        double U = sc.nextDouble();
+
+        double Q = m * cp * (Th_in - Th_out);
+
+        double DT1 = Th_in - Tc_out;
+        double DT2 = Th_out - Tc_in;
+
+        double LMTD = (DT1 - DT2) / Math.log(DT1 / DT2);
+
+        double Area = Q / (U * LMTD);
+
+        System.out.println("\n----- RESULTS -----");
+        System.out.println("Heat Duty (Q) = " + Q + " kW");
+        System.out.println("LMTD = " + LMTD + " °C");
+        System.out.println("Area Required = " + Area + " m²");
+
+        sc.close();
+    }
+}
